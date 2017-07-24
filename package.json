@@ -1,0 +1,34 @@
+{
+  "name": "maybe-async",
+  "version": "1.0.0",
+  "description": "Easy handling of promise/non-promise values.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "prepublish": "gulp build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alex94puchades/maybe-async.git"
+  },
+  "keywords": [
+    "maybe",
+    "promise",
+    "async",
+    "yield"
+  ],
+  "author": "Alex Puchades <alex94puchades+dev@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/alex94puchades/maybe-async/issues"
+  },
+  "homepage": "https://github.com/alex94puchades/maybe-async#readme",
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-typescript": "^3.2.1",
+    "typescript": "^2.4.2"
+  }
+}
