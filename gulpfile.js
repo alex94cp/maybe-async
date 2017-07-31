@@ -1,5 +1,6 @@
 const del = require('del');
 const gulp = require('gulp');
+const merge = require('merge2');
 const mocha = require('gulp-mocha');
 const ts = require('gulp-typescript');
 const sourcemaps = require('gulp-sourcemaps');
@@ -8,12 +9,15 @@ const sourcemapsSupport = require('gulp-sourcemaps-support');
 const tsProject = ts.createProject('tsconfig.json');
 
 gulp.task('build', () => {
-	return tsProject.src()
-	                .pipe(sourcemaps.init())
-	                .pipe(tsProject())
-	                .pipe(sourcemapsSupport())
-	                .pipe(sourcemaps.write('.'))
-	                .pipe(gulp.dest('dist'));
+	const tsResult = tsProject.src()
+	                          .pipe(sourcemaps.init())
+	                          .pipe(tsProject());
+	return merge([
+		tsResult.dts.pipe(gulp.dest('dist')),
+		tsResult.js.pipe(sourcemapsSupport())
+		           .pipe(sourcemaps.write('.'))
+		           .pipe(gulp.dest('dist')),
+	]);
 });
 
 gulp.task('clean', () => {
