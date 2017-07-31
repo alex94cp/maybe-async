@@ -3,6 +3,7 @@ const gulp = require('gulp');
 const mocha = require('gulp-mocha');
 const ts = require('gulp-typescript');
 const sourcemaps = require('gulp-sourcemaps');
+const sourcemapsSupport = require('gulp-sourcemaps-support');
 
 const tsProject = ts.createProject('tsconfig.json');
 
@@ -10,6 +11,7 @@ gulp.task('build', () => {
 	return tsProject.src()
 	                .pipe(sourcemaps.init())
 	                .pipe(tsProject())
+	                .pipe(sourcemapsSupport())
 	                .pipe(sourcemaps.write('.'))
 	                .pipe(gulp.dest('dist'));
 });
