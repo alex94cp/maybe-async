@@ -1,5 +1,6 @@
 const del = require('del');
 const gulp = require('gulp');
+const mocha = require('gulp-mocha');
 const ts = require('gulp-typescript');
 const sourcemaps = require('gulp-sourcemaps');
 
@@ -19,6 +20,11 @@ gulp.task('clean', () => {
 
 gulp.task('watch', () => {
 	gulp.watch('src/**/*.ts', ['build']);
+});
+
+gulp.task('test', ['build'], () => {
+	gulp.src('test/**/*.js')
+	    .pipe(mocha());
 });
 
 gulp.task('default', ['build']);
