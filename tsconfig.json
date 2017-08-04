@@ -3,10 +3,10 @@
 		"src/index.ts"
 	],
 	"compilerOptions": {
-		"noImplicitAny": true,
-		"strictNullChecks": true,
-		"declaration": true,
+		"target": "es6",
 		"module": "commonjs",
-		"target": "es6"
+		"strictNullChecks": true,
+		"noImplicitAny": true,
+		"declaration": true
 	}
 }
