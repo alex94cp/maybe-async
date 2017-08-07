@@ -1,6 +1,6 @@
 {
   "name": "maybe-async",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Easy handling of promise/non-promise values.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
