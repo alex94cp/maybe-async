@@ -5,9 +5,10 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "prepare": "npm run build",
-    "test": "mocha"
+    "prepare": "tsc",
+    "pretest": "npm run prepare",
+    "posttest": "nyc report -r json && codecov -f coverage/*.json",
+    "test": "nyc mocha --require source-map-support/register"
   },
   "repository": {
     "type": "git",
@@ -27,7 +28,10 @@
   "homepage": "https://github.com/alex94puchades/maybe-async#readme",
   "devDependencies": {
     "chai": "^4.1.0",
+    "codecov": "^2.3.0",
     "mocha": "^3.4.2",
+    "nyc": "^11.1.0",
+    "source-map-support": "^0.4.15",
     "typescript": "^2.4.2"
   }
 }

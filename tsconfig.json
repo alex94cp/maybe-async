@@ -8,6 +8,7 @@
 		"module": "commonjs",
 		"strictNullChecks": true,
 		"noImplicitAny": true,
-		"declaration": true
+		"declaration": true,
+		"sourceMap": true
 	}
 }
