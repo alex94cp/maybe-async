@@ -9,12 +9,14 @@ describe('maybeAsync', () => {
 		expect(result).to.equal(123);
 	});
 
-	it('returns promised value', async () => {
+	it('returns promised value', () => {
 		const result = maybeAsync(function*() {
 			return Promise.resolve(123);
 		});
 		expect(result).to.be.an.instanceof(Promise);
-		expect(await result).to.equal(123);
+		return result.then(value => {
+			expect(value).to.equal(123);
+		});
 	});
 
 	it('yields values and returns value', () => {
@@ -28,7 +30,7 @@ describe('maybeAsync', () => {
 		expect(result).to.equal(123 + 456);
 	});
 
-	it('yields promised values and returns promise', async () => {
+	it('yields promised values and returns promise', () => {
 		const result = maybeAsync(function*() {
 			const a = yield Promise.resolve(123);
 			expect(a).to.equal(123);
@@ -37,7 +39,9 @@ describe('maybeAsync', () => {
 			return a + b;
 		});
 		expect(result).to.be.an.instanceof(Promise);
-		expect(await result).to.equal(123 + 456);
+		return result.then(value => {
+			expect(value).to.equal(123 + 456);
+		});
 	});
 
 	it('yields array of values and returns value', () => {
@@ -51,7 +55,7 @@ describe('maybeAsync', () => {
 		expect(result).to.deep.equal([123, 456]);
 	});
 
-	it('yields array of promised values and returns promise', async () => {
+	it('yields array of promised values and returns promise', () => {
 		const result = maybeAsync(function*() {
 			const values = yield [
 				Promise.resolve(123),
@@ -62,11 +66,13 @@ describe('maybeAsync', () => {
 			return values;
 		});
 		expect(result).to.be.an.instanceof(Promise);
-		expect(await result).to.be.an.instanceof(Array);
-		expect(await result).to.deep.equal([123, 456]);
+		return result.then(value => {
+			expect(value).to.be.an.instanceof(Array);
+			expect(value).to.deep.equal([123, 456]);
+		});
 	});
 
-	it('yields array of mixed values and returns promise', async () => {
+	it('yields array of mixed values and returns promise', () => {
 		const result = maybeAsync(function*() {
 			const values = yield [
 				123, Promise.resolve(456),
@@ -76,7 +82,9 @@ describe('maybeAsync', () => {
 			return values;
 		});
 		expect(result).to.be.an.instanceof(Promise);
-		expect(await result).to.be.an.instanceof(Array);
-		expect(await result).to.deep.equal([123, 456]);
+		return result.then(value => {
+			expect(value).to.be.an.instanceof(Array);
+			expect(value).to.deep.equal([123, 456]);
+		});
 	});
 });
