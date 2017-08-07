@@ -5,8 +5,9 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "prepare": "gulp build",
-    "test": "gulp test"
+    "build": "tsc",
+    "prepare": "npm run build",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -26,13 +27,6 @@
   "homepage": "https://github.com/alex94puchades/maybe-async#readme",
   "devDependencies": {
     "chai": "^4.1.0",
-    "del": "^3.0.0",
-    "gulp": "^3.9.1",
-    "gulp-mocha": "^4.3.1",
-    "gulp-sourcemaps": "^2.6.0",
-    "gulp-sourcemaps-support": "0.0.1",
-    "gulp-typescript": "^3.2.1",
-    "merge2": "^1.1.0",
     "mocha": "^3.4.2",
     "typescript": "^2.4.2"
   }
