@@ -6,12 +6,12 @@ function isPromise<T>(value: any): value is Promise<T> {
 	return value && value.then !== undefined;
 }
 
-export function maybeAsync<T>(fn: MaybeAsyncFn<T>): MaybePromise<T> {
+export function maybeAsync<R>(fn: MaybeAsyncFn<R>): MaybePromise<R> {
 	let prev = undefined;
-	for (const iter: MaybeAsyncIterator<T> = fn();;) {
+	for (const iter = fn();;) {
 		const {value, done} = iter.next(prev);
 		if (done)
-			return value as MaybePromise<T>;
+			return value as MaybePromise<R>;
 
 		if (isPromise(value))
 			return resumeAsyncFn(value, iter);
@@ -23,11 +23,11 @@ export function maybeAsync<T>(fn: MaybeAsyncFn<T>): MaybePromise<T> {
 	}
 }
 
-async function resumeAsyncFn<T>(value: MaybePromise<any>, iter: MaybeAsyncIterator<any>): Promise<T> {
+async function resumeAsyncFn<R>(value: MaybePromise<any>, iter: MaybeAsyncIterator<any>): Promise<R> {
 	for (let prev = await value;;) {
 		const {value, done} = iter.next(prev);
 		if (done)
-			return value as Promise<T>;
+			return value as Promise<R>;
 
 		if (isPromise(value)) {
 			prev = await value;
